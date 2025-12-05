@@ -13,8 +13,6 @@ This platform addresses the complex challenge of reconciling cryptocurrency trad
 - **REST/gRPC APIs** - Modern service architecture
 - **Web dashboard** - Visual interface for monitoring and analysis
 
-This is the type of infrastructure used by companies like Cryptio, Bitwave, and Cointracker for crypto accounting and compliance.
-
 ## 🏗️ Architecture
 
 ### Core Components
@@ -52,7 +50,7 @@ This is the type of infrastructure used by companies like Cryptio, Bitwave, and 
 ```
 crypto-reconciliation-platform/
 ├── packages/
-│   ├── exchange-sdk/          # Exchange API integrations
+│   ├── exchange-sdk/           # Exchange API integrations
 │   ├── normalizer/             # Data transformation layer
 │   └── shared/                 # Shared types & utilities
 ├── services/
@@ -63,7 +61,8 @@ crypto-reconciliation-platform/
 │   └── dashboard/              # Web UI (Next.js)
 └── infrastructure/
     ├── database/               # Postgres schemas & migrations
-    └── docker/                 # Container configurations
+    ├── docker/                 # Container configurations
+    └── k8s/                    # Kubernetes manifests
 ```
 
 ## 🚀 Getting Started

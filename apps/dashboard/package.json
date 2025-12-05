@@ -1,0 +1,18 @@
+{
+  "name": "@app/dashboard",
+  "version": "1.0.0",
+  "description": "Web dashboard for crypto reconciliation",
+  "scripts": {
+    "build": "echo 'Dashboard build placeholder'",
+    "lint": "echo 'Dashboard lint placeholder'",
+    "lint:fix": "echo 'Dashboard lint:fix placeholder'",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@app/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
+
