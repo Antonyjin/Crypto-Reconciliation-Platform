@@ -50,7 +50,7 @@ This platform addresses the complex challenge of reconciling cryptocurrency trad
 ```
 crypto-reconciliation-platform/
 ├── packages/
-│   ├── exchange-sdk/          # Exchange API integrations
+│   ├── exchange-sdk/           # Exchange API integrations
 │   ├── normalizer/             # Data transformation layer
 │   └── shared/                 # Shared types & utilities
 ├── services/
@@ -61,7 +61,8 @@ crypto-reconciliation-platform/
 │   └── dashboard/              # Web UI (Next.js)
 └── infrastructure/
     ├── database/               # Postgres schemas & migrations
-    └── docker/                 # Container configurations
+    ├── docker/                 # Container configurations
+    └── k8s/                    # Kubernetes manifests
 ```
 
 ## 🚀 Getting Started

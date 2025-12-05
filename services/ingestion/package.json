@@ -1,0 +1,21 @@
+{
+  "name": "@app/ingestion-service",
+  "version": "1.0.0",
+  "description": "Data ingestion pipeline service",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@app/shared": "workspace:*",
+    "@app/exchange-sdk": "workspace:*",
+    "@app/normalizer": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
+
