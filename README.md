@@ -13,8 +13,6 @@ This platform addresses the complex challenge of reconciling cryptocurrency trad
 - **REST/gRPC APIs** - Modern service architecture
 - **Web dashboard** - Visual interface for monitoring and analysis
 
-This is the type of infrastructure used by companies like Cryptio, Bitwave, and Cointracker for crypto accounting and compliance.
-
 ## 🏗️ Architecture
 
 ### Core Components
