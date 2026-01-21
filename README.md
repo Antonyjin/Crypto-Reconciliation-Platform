@@ -70,9 +70,8 @@ crypto-reconciliation-platform/
 ### Prerequisites
 
 - Node.js 18+
-- PostgreSQL 14+
-- pnpm (or npm/yarn)
-- Docker (optional, for containerized deployment)
+- pnpm 8+
+- Docker & Docker Compose
 
 ### Installation
 
@@ -80,8 +79,8 @@ crypto-reconciliation-platform/
 # Install dependencies
 pnpm install
 
-# Setup database
-pnpm db:setup
+# Start the database
+pnpm db:up
 
 # Run migrations
 pnpm db:migrate
@@ -90,13 +89,53 @@ pnpm db:migrate
 pnpm dev
 ```
 
+### Database Setup
+
+Start PostgreSQL and Adminer using Docker Compose:
+
+```bash
+# Start database services
+cd infrastructure/docker
+docker compose up -d
+
+# Check status
+docker compose ps
+
+# View logs
+docker compose logs -f postgres
+
+# Stop services
+docker compose down
+
+# Stop and remove data
+docker compose down -v
+```
+
+**Access:**
+- PostgreSQL: `localhost:5432`
+- Adminer (DB UI): `http://localhost:8080`
+  - System: PostgreSQL
+  - Server: postgres
+  - Username: postgres
+  - Password: postgres
+  - Database: crypto_recon
+
+**Connect via psql:**
+```bash
+psql postgresql://postgres:postgres@localhost:5432/crypto_recon
+```
+
 ### Environment Configuration
 
 Create a `.env` file in the root:
 
 ```env
 # Database
-DATABASE_URL=postgresql://user:password@localhost:5432/crypto_recon
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/crypto_recon
+POSTGRES_DB=crypto_recon
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_PORT=5432
 
 # Exchange API Keys
 COINBASE_API_KEY=your_key
