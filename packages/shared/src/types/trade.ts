@@ -9,3 +9,4 @@ export interface Trade {
   fee?: string,
   feeAsset?: string
 }
+

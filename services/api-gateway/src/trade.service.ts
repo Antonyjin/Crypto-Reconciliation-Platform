@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Trade } from "@app/shared";
+import { Trade, CreateTradeDto } from "@app/shared";
 
 @Injectable()
 export class TradeService {
@@ -30,6 +30,17 @@ export class TradeService {
 
   getTradeById(id: string): Trade | undefined {
     return this.trades.find(trade => trade.id === id);
+  }
+  
+  createTrade(data: CreateTradeDto): Trade {
+    const newTrade: Trade = {
+      ...data,
+      id: Date.now().toString(),
+      timestamp: new Date(),
+    };
+  
+    this.trades.push(newTrade);
+    return newTrade;
   }
 }
 

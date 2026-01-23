@@ -1,6 +1,6 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common'
+import { Controller, Get, Post, Param, Body, NotFoundException } from '@nestjs/common'
 import { TradeService } from './trade.service'
-import { Trade } from '@app/shared'
+import { Trade, CreateTradeDto } from '@app/shared'
 
 @Controller()
 export class TradeController {
@@ -19,4 +19,10 @@ export class TradeController {
   
     return trade;
   }
+
+  @Post('/trades')
+  createTrade(@Body() data: CreateTradeDto) {
+    return this.tradeService.createTrade(data);
+  }
+
 }
