@@ -1,46 +1,20 @@
 import { Injectable } from "@nestjs/common";
-import { Trade, CreateTradeDto } from "@app/shared";
+import { CreateTradeDto } from "@app/shared";
+import { PrismaService } from "./prisma.service";
 
 @Injectable()
 export class TradeService {
-  private trades: Trade[] = [
-    {
-      id: '1',
-      exchange: 'binance',
-      baseAsset: 'BTC',
-      quoteAsset: 'USDT',
-      side: 'BUY',
-      amount: '0.5',
-      timestamp: new Date(),
-    },
-    {
-      id: '2',
-      exchange: 'coinbase',
-      baseAsset: 'ETH',
-      quoteAsset: 'EUR',
-      side: 'SELL',
-      amount: '2.0',
-      timestamp: new Date(),
-    },
-  ];
+  constructor(private prisma: PrismaService) {}
 
-  getTrades(): Trade[] {
-    return this.trades;
+  getTrades() {
+    return this.prisma.trade.findMany();
   }
 
-  getTradeById(id: string): Trade | undefined {
-    return this.trades.find(trade => trade.id === id);
+  getTradeById(id: string) {
+    return this.prisma.trade.findUnique({ where: { id } });
   }
-  
-  createTrade(data: CreateTradeDto): Trade {
-    const newTrade: Trade = {
-      ...data,
-      id: Date.now().toString(),
-      timestamp: new Date(),
-    };
-  
-    this.trades.push(newTrade);
-    return newTrade;
+
+  createTrade(data: CreateTradeDto) {
+    return this.prisma.trade.create({ data });
   }
 }
-
