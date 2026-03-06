@@ -8,7 +8,8 @@
     "dev": "ts-node-dev --respawn src/main.ts",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "test": "jest"
   },
   "dependencies": {
     "@app/shared": "workspace:*",
@@ -25,7 +26,10 @@
     "prisma": "^7.3.0"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/pg": "^8.16.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.0"
   }

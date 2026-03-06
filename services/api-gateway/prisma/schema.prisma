@@ -13,6 +13,7 @@ model Trade {
   quoteAsset String
   side       String
   amount     String
+  price      String
   fee        String?
   feeAsset   String?
   timestamp  DateTime @default(now())

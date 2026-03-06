@@ -5,6 +5,7 @@ export interface Trade {
   quoteAsset: string,
   side: 'BUY' | 'SELL',
   amount: string,
+  price: string,
   timestamp: Date,
   fee?: string,
   feeAsset?: string
