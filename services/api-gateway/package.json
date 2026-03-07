@@ -26,6 +26,7 @@
     "prisma": "^7.3.0"
   },
   "devDependencies": {
+    "@nestjs/testing": "^11.1.16",
     "@types/jest": "^30.0.0",
     "@types/pg": "^8.16.0",
     "jest": "^30.2.0",
