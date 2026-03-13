@@ -5,17 +5,25 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "dev": "ts-node-dev --respawn src/main.ts",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@app/shared": "workspace:*",
     "@app/exchange-sdk": "workspace:*",
-    "@app/normalizer": "workspace:*"
+    "@app/normalizer": "workspace:*",
+    "@app/shared": "workspace:*",
+    "@nestjs/common": "^11.1.12",
+    "@nestjs/core": "^11.1.12",
+    "@nestjs/platform-express": "^11.1.12",
+    "axios": "^1.13.6",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
   },
   "devDependencies": {
+    "@types/node": "^25.0.9",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.0"
   }
 }
-
