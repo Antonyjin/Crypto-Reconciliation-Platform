@@ -1,6 +1,10 @@
 import {IsString, IsIn, IsNotEmpty, IsOptional} from 'class-validator'
 
 export class CreateTradeDto {
+  @IsNotEmpty()
+  @IsString()
+  externalId!: string;
+
   @IsIn(['binance', 'coinbase', 'kraken'])
   exchange!: 'binance' | 'coinbase' | 'kraken';
   

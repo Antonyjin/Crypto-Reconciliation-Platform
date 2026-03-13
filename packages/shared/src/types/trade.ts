@@ -1,5 +1,6 @@
 export interface Trade {
   id: string,
+  externalId: string,
   exchange: 'binance' | 'coinbase' | 'kraken',
   baseAsset: string,
   quoteAsset: string,

@@ -29,6 +29,11 @@ export class TradeController {
     return this.tradeService.createTrade(data);
   }
   
+  @Post('/trades/upsert')
+  async upsertTrades(@Body() data: CreateTradeDto) {
+    return this.tradeService.upsertTrade(data);
+  }
+
   @Put('/trades/:id')
   async updateTrade(@Param('id') id: string, @Body() data: UpdateTradeDto) {
     await this.FindTradeOrFail(id);

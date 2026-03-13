@@ -18,8 +18,21 @@ export class TradeService {
     return this.prisma.trade.create({ data });
   }
   
-updateTrade(id: string, data: UpdateTradeDto) {
+  updateTrade(id: string, data: UpdateTradeDto) {
     return this.prisma.trade.update({ where: { id }, data });
+  }
+
+  upsertTrade(data: CreateTradeDto) {
+    return this.prisma.trade.upsert({
+      where: {
+        externalId_exchange: {
+          externalId: data.externalId,
+          exchange: data.exchange,
+        },
+      },
+      create: data,
+      update: {},
+    });
   }
 
   deleteTrade(id: string) {

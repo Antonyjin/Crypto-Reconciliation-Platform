@@ -8,6 +8,7 @@ datasource db {
 
 model Trade {
   id         String   @id @default(uuid())
+  externalId String     
   exchange   String
   baseAsset  String
   quoteAsset String
@@ -18,4 +19,6 @@ model Trade {
   feeAsset   String?
   timestamp  DateTime @default(now())
   createdAt  DateTime @default(now())
+
+  @@unique([externalId, exchange])
 }

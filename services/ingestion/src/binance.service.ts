@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import axios from 'axios'
-import { Trade } from '@app/shared'
 @Injectable()
 export class BinanceService {
   normalizeTrades(rawTrades: any[], symbol: string) {
@@ -8,14 +7,13 @@ export class BinanceService {
     const baseAsset = symbol.slice(0, -4);      // "BTC"
 
     return rawTrades.map(trade => ({
-      id: String(trade.id),
+      externalId: String(trade.id),
       exchange: 'binance' as const,
       baseAsset,
       quoteAsset,
       side: trade.isBuyerMaker ? 'SELL' as const : 'BUY' as const,
       amount: trade.qty,
       price: trade.price,
-      timestamp: new Date(trade.time),
     }));
   }
 
@@ -24,15 +22,14 @@ export class BinanceService {
     return this.normalizeTrades(response.data, symbol);
   }
 
-  async saveTrades(trades: Trade[]) {
+  async saveTrades(trades: any[]) {
     for (const trade of trades) {
-      const {id, timestamp, ...data } = trade;
-      await axios.post('http://localhost:3000/trades', data);
+      await axios.post('http://localhost:3000/trades/upsert', trade);
     }
   }
 
   async ingestTrades(symbol: string) {
-    let trades: Trade[] = await this.getRecentTrades(symbol);
+    let trades = await this.getRecentTrades(symbol);
 
     this.saveTrades(trades);
     return { saved: trades.length };
