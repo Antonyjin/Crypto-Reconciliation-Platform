@@ -24,7 +24,7 @@ export class BinanceService {
 
   async saveTrades(trades: any[]) {
     for (const trade of trades) {
-      await axios.post('http://localhost:3000/trades/upsert', trade);
+      await axios.post('http://api-gateway:3000/trades/upsert', trade);
     }
   }
 
