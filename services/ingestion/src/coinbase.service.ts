@@ -3,23 +3,23 @@ import { BaseExchangeService } from './base-exchange.service'
 import axios from 'axios'
 
 @Injectable()
-export class BinanceService extends BaseExchangeService {
+export class CoinbaseService extends BaseExchangeService {
   normalizeTrades(rawTrades: any[], symbol: string) {
     const asset = symbol.split('-');
 
     return rawTrades.map(trade => ({
-      externalId: String(trade.id),
-      exchange: 'binance' as const,
+      externalId: String(trade.trade_id),
+      exchange: 'coinbase' as const,
       baseAsset: asset[0],
       quoteAsset: asset[1],
-      side: trade.isBuyerMaker ? 'SELL' as const : 'BUY' as const,
-      amount: trade.qty,
+      side: trade.side.toUpperCase(),
+      amount: trade.size,
       price: trade.price,
     }));
   }
 
   async getRecentTrades(symbol: string) {
-    const response = await axios.get(`https://api.binance.com/api/v3/trades?symbol=${symbol.replace("-", "")}&limit=5`);
+    const response = await axios.get(`https://api.exchange.coinbase.com/products/${symbol}/trades`);
     return this.normalizeTrades(response.data, symbol);
   }
 }
