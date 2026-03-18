@@ -20,6 +20,7 @@ describe('TradeService', () => {
 
   const mockTrade = {
     exchange: 'binance' as const,
+    externalId: '1',
     baseAsset: 'BTC',
     quoteAsset: 'USDT',
     side: 'BUY' as const,

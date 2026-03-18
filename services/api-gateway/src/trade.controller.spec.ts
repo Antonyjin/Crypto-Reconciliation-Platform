@@ -9,6 +9,7 @@ describe('TradeController', () => {
   
   const mockTrade = {
       id: '1',
+      externalId: '1',
       exchange: 'binance' as const,
       baseAsset: 'BTC',
       quoteAsset: 'USDT',
