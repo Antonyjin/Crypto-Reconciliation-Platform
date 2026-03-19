@@ -22,3 +22,22 @@ model Trade {
 
   @@unique([externalId, exchange])
 }
+
+model ReconciliationReport {
+  id              String  @id @default(uuid())
+  date            DateTime
+  total           Int
+  matchedCount    Int
+  mismatchedCount Int
+  missingCount    Int
+  items           ReconciliationItem[]
+} 
+
+model ReconciliationItem {
+  id       String  @id @default(uuid())
+  reportId String
+  parent   ReconciliationReport  @relation(fields: [reportId], references: [id])
+  status   String
+  csvData  Json
+  dbData   Json?
+}
