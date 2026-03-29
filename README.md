@@ -144,11 +144,31 @@ cd services/api-gateway && npm test
 
 Tests cover TradeService (CRUD operations) and TradeController (HTTP layer, 404 handling).
 
+### End-to-End Tests
+
+E2E tests run against a real PostgreSQL database — no mocks. They test the full HTTP request → NestJS → Prisma → DB chain.
+
+```bash
+# Start the test database (port 5433, isolated from dev)
+docker compose -f docker-compose.test.yml up -d
+
+# Run e2e tests
+DATABASE_URL="postgresql://antonyjin:password@localhost:5433/crypto_recon_test" pnpm test:e2e
+
+# Stop the test database
+docker compose -f docker-compose.test.yml down
+```
+
+**Coverage (24 tests):**
+- **Health** — Server boot, `/health` endpoint
+- **Trades** — Full CRUD, query filters, upsert deduplication, validation (400), not found (404)
+- **Reconciliation** — CSV upload with matched/mismatched/missing detection, mixed results, report persistence and retrieval
+
 CI runs automatically on every push via GitHub Actions.
 
 ## Roadmap
 
-- [ ] End-to-end tests
+- [x] End-to-end tests
 - [ ] Scheduled ingestion (cron jobs)
 - [ ] gRPC communication between services
 - [ ] Advanced reconciliation (timestamp matching, confidence scoring)

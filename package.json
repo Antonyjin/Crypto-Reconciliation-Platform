@@ -10,6 +10,7 @@
     "lint:fix": "pnpm -r lint:fix",
     "test": "pnpm -r test",
     "test:coverage": "pnpm -r test:coverage",
+    "test:e2e": "pnpm -r test:e2e",
     "test:integration": "pnpm -r test:integration",
     "clean": "pnpm -r clean && rm -rf node_modules",
     "db:up": "docker compose -f infrastructure/docker/docker-compose.yml up -d",
