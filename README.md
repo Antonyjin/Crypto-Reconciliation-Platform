@@ -50,6 +50,7 @@ crypto-reconciliation-platform/
 - Unified symbol format (`BTC-USDT`) across all exchanges
 - Abstract `BaseExchangeService` class — each exchange implements only `getRecentTrades()` and `normalizeTrades()`
 - Upsert logic to avoid duplicate trades
+- **Scheduled ingestion** via cron (default: every 5 minutes)
 - Error handling with proper HTTP status codes
 
 ### Trade Management
@@ -166,10 +167,23 @@ docker compose -f docker-compose.test.yml down
 
 CI runs automatically on every push via GitHub Actions.
 
+### Scheduled Ingestion
+
+The ingestion service automatically fetches trades from all exchanges on a cron schedule (default: every 5 minutes).
+
+Configure via environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `INGESTION_CRON` | `*/5 * * * *` | Cron expression for ingestion frequency |
+| `BINANCE_SYMBOLS` | `BTC-USDT,ETH-USDT` | Comma-separated symbols to ingest from Binance |
+| `COINBASE_SYMBOLS` | `BTC-USD,ETH-USD` | Comma-separated symbols to ingest from Coinbase |
+| `KRAKEN_SYMBOLS` | `BTC-USD,ETH-USD` | Comma-separated symbols to ingest from Kraken |
+
 ## Roadmap
 
 - [x] End-to-end tests
-- [ ] Scheduled ingestion (cron jobs)
+- [x] Scheduled ingestion (cron jobs)
 - [ ] gRPC communication between services
 - [ ] Advanced reconciliation (timestamp matching, confidence scoring)
 - [ ] Authentication (JWT)
