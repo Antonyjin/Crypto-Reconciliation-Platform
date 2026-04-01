@@ -34,10 +34,12 @@ model ReconciliationReport {
 } 
 
 model ReconciliationItem {
-  id       String  @id @default(uuid())
-  reportId String
-  parent   ReconciliationReport  @relation(fields: [reportId], references: [id])
-  status   String
-  csvData  Json
-  dbData   Json?
+  id         String  @id @default(uuid())
+  reportId   String
+  parent     ReconciliationReport  @relation(fields: [reportId], references: [id])
+  status     String
+  matchType  String?
+  confidence Float?
+  csvData    Json
+  dbData     Json?
 }

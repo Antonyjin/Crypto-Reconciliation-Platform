@@ -60,9 +60,10 @@ crypto-reconciliation-platform/
 
 ### CSV Reconciliation
 - Upload a CSV file and compare with database trades
-- Tolerance-based matching on amounts and prices (±0.0001)
-- Categorizes trades as **matched**, **mismatched**, or **missing**
-- Saves reconciliation reports to database
+- **Two-step matching**: exact match by `externalId + exchange`, then fuzzy match by timestamp proximity (±5s window)
+- **Confidence scoring** (0-100%) with breakdown by field: amount (30pts), price (30pts), side (20pts), timestamp (20pts)
+- Trades scoring ≥80% are **matched**, below are **mismatched**, no match found are **missing**
+- Saves reconciliation reports with confidence scores and match type (`exact` / `fuzzy`) to database
 - Report history with detail view
 
 ### Web Dashboard
@@ -186,7 +187,7 @@ Configure via environment variables:
 - [x] End-to-end tests
 - [x] Scheduled ingestion (cron jobs)
 - [x] gRPC communication between services
-- [ ] Advanced reconciliation (timestamp matching, confidence scoring)
+- [x] Advanced reconciliation (timestamp matching, confidence scoring)
 - [ ] Authentication (JWT)
 
 ## License
