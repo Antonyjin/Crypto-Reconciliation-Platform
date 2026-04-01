@@ -14,8 +14,11 @@
   },
   "dependencies": {
     "@app/shared": "workspace:*",
+    "@grpc/grpc-js": "^1.14.3",
+    "@grpc/proto-loader": "^0.8.0",
     "@nestjs/common": "^11.1.12",
     "@nestjs/core": "^11.1.12",
+    "@nestjs/microservices": "^11.1.17",
     "@nestjs/platform-express": "^11.1.12",
     "@prisma/adapter-pg": "^7.3.0",
     "@prisma/client": "^7.3.0",

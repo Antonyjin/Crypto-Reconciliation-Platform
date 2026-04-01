@@ -1,9 +1,12 @@
-import axios from 'axios'
 import { HttpException } from '@nestjs/common'
+import axios from 'axios'
+import { GrpcTradeClientService } from './grpc-trade-client.service'
 
 export abstract class BaseExchangeService {
   abstract normalizeTrades(rawTrades: any[], symbol: string): any[];
   abstract getRecentTrades(symbol: string): Promise<any>;
+
+  constructor(protected readonly grpcClient: GrpcTradeClientService) {}
 
   async saveTrades(trades: any[]) {
     let saved = 0;
@@ -11,9 +14,10 @@ export abstract class BaseExchangeService {
 
     for (const trade of trades) {
       try {
-        await axios.post('http://api-gateway:3000/trades/upsert', trade);
+        await this.grpcClient.upsertTrade(trade);
         saved++;
       } catch(error) {
+      console.error('gRPC upsert failed:', (error as Error).message);
       failed++
       }
     }

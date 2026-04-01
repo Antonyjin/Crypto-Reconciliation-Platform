@@ -135,6 +135,7 @@ externalId,exchange,amount,price,side
 - **Tolerance-based reconciliation** — Compares amounts/prices as floats with ±0.0001 tolerance instead of exact string matching, accounting for decimal formatting differences.
 - **Reconciliation kept in API Gateway** — Direct database access avoids unnecessary inter-service calls. Pragmatic choice given project scope.
 - **Upsert for deduplication** — Composite unique constraint on `(externalId, exchange)` prevents duplicate trades on re-ingestion.
+- **gRPC for inter-service communication** — The ingestion service communicates with the API Gateway via gRPC instead of HTTP, using a shared protobuf contract (`packages/shared/proto/trades.proto`).
 
 ## Testing
 
@@ -184,7 +185,7 @@ Configure via environment variables:
 
 - [x] End-to-end tests
 - [x] Scheduled ingestion (cron jobs)
-- [ ] gRPC communication between services
+- [x] gRPC communication between services
 - [ ] Advanced reconciliation (timestamp matching, confidence scoring)
 - [ ] Authentication (JWT)
 

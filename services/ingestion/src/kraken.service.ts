@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { BaseExchangeService } from './base-exchange.service'
+import { GrpcTradeClientService } from './grpc-trade-client.service'
 import axios from 'axios'
 
 @Injectable()
 export class KrakenService extends BaseExchangeService {
+  constructor(grpcClient: GrpcTradeClientService) {
+    super(grpcClient);
+  }
+
   normalizeTrades(rawTrades: any[], symbol: string) {
     const asset = symbol.split('-');
 

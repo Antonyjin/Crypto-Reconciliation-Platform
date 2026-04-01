@@ -17,6 +17,7 @@ services:
       dockerfile: services/api-gateway/Dockerfile
     ports:
       - '3000:3000'
+      - '5050:5050'
     environment:
       DATABASE_URL: postgresql://antonyjin:password@postgres:5432/crypto_recon
     depends_on:

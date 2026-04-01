@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Query, NotFoundException } from '@nestjs/common'
-import { TradeService } from './trade.service'
+import { TradeService } from './trade.service'
 import { CreateTradeDto, UpdateTradeDto, FiltersDto } from '@app/shared'
 
 @Controller()
@@ -28,7 +28,7 @@ export class TradeController {
   async createTrade(@Body() data: CreateTradeDto) {
     return this.tradeService.createTrade(data);
   }
-  
+
   @Post('/trades/upsert')
   async upsertTrades(@Body() data: CreateTradeDto) {
     return this.tradeService.upsertTrade(data);
@@ -39,7 +39,7 @@ export class TradeController {
     await this.FindTradeOrFail(id);
     return this.tradeService.updateTrade(id, data);
   }
-  
+
   @Delete('/trades/:id')
   async deleteTrade(@Param('id') id: string): Promise<any> {
     await this.FindTradeOrFail(id);
