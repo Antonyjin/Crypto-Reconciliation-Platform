@@ -43,8 +43,6 @@ export class TradeController {
   @Delete('/trades/:id')
   async deleteTrade(@Param('id') id: string): Promise<any> {
     await this.FindTradeOrFail(id);
-    const deleted = this.tradeService.deleteTrade(id);
-
-    return deleted;
+    return await this.tradeService.deleteTrade(id);
   }
 }

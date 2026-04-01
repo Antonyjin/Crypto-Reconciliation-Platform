@@ -46,7 +46,7 @@ describe('TradeService', () => {
     expect(mockPrisma.trade.create).toHaveBeenCalledWith({data: mockTrade});
   });
 
-  it('updateTrade calls prisma.trade.udpateTrade with data', async () => {
+  it('updateTrade calls prisma.trade.update with data', async () => {
     mockPrisma.trade.update.mockResolvedValue([]);
     await tradeService.updateTrade('123', mockTrade);
   expect(mockPrisma.trade.update).toHaveBeenCalledWith({where: {id: '123'}, data: mockTrade});

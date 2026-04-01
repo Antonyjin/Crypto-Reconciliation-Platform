@@ -16,8 +16,7 @@ export abstract class BaseExchangeService {
       try {
         await this.grpcClient.upsertTrade(trade);
         saved++;
-      } catch(error) {
-      console.error('gRPC upsert failed:', (error as Error).message);
+      } catch {
       failed++
       }
     }

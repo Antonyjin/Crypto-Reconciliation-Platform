@@ -26,7 +26,7 @@ export class KrakenService extends BaseExchangeService {
   async getRecentTrades(symbol: string) {
     let newSymbol: string[] = symbol.split('-');
 
-    newSymbol[0] === "BTC" ? "XBT" : newSymbol[0]
+    newSymbol[0] = newSymbol[0] === "BTC" ? "XBT" : newSymbol[0];
     const response = await axios.get(`https://api.kraken.com/0/public/Trades?pair=${newSymbol[0].concat(newSymbol[1])}`);
     return this.normalizeTrades(Object.values(response.data.result)[0] as any[], symbol);
   }
