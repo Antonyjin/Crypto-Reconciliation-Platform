@@ -32,5 +32,17 @@ services:
     depends_on:
       - api-gateway
 
+  dashboard:
+    build:
+      context: .
+      dockerfile: apps/dashboard/Dockerfile
+    ports:
+      - '3002:3002'
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      NEXT_PUBLIC_INGESTION_URL: http://localhost:3001
+    depends_on:
+      - api-gateway
+
 volumes:
   pgdata:

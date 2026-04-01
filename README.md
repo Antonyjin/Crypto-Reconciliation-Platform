@@ -82,11 +82,8 @@ crypto-reconciliation-platform/
 ### Run with Docker
 
 ```bash
-# Start API Gateway + PostgreSQL
+# Start everything (API Gateway + Ingestion + Dashboard + PostgreSQL)
 docker-compose up --build
-
-# Start the dashboard (in another terminal)
-cd apps/dashboard && npm run dev -- -p 3002
 ```
 
 - API Gateway: http://localhost:3000
