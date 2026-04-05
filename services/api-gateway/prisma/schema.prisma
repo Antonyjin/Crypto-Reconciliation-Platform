@@ -7,39 +7,53 @@ datasource db {
 }
 
 model Trade {
-  id         String   @id @default(uuid())
-  externalId String     
-  exchange   String
-  baseAsset  String
-  quoteAsset String
-  side       String
-  amount     String
-  price      String
-  fee        String?
-  feeAsset   String?
-  timestamp  DateTime @default(now())
-  createdAt  DateTime @default(now())
+  id          String       @id @default(uuid())
+  externalId  String
+  exchange    String
+  baseAsset   String
+  quoteAsset  String
+  side        String
+  amount      String
+  price       String
+  fee         String?
+  feeAsset    String?
+  timestamp   DateTime     @default(now())
+  createdAt   DateTime     @default(now())
+  settlements Settlement[]
 
   @@unique([externalId, exchange])
 }
 
 model ReconciliationReport {
-  id              String  @id @default(uuid())
+  id              String               @id @default(uuid())
   date            DateTime
   total           Int
   matchedCount    Int
   mismatchedCount Int
   missingCount    Int
   items           ReconciliationItem[]
-} 
+}
 
 model ReconciliationItem {
-  id         String  @id @default(uuid())
+  id         String               @id @default(uuid())
   reportId   String
-  parent     ReconciliationReport  @relation(fields: [reportId], references: [id])
+  parent     ReconciliationReport @relation(fields: [reportId], references: [id])
   status     String
   matchType  String?
   confidence Float?
   csvData    Json
   dbData     Json?
+}
+
+model Settlement {
+  id            String    @id @default(uuid())
+  tradeId       String    @unique
+  trade         Trade     @relation(fields: [tradeId], references: [id])
+  status        String
+  retryCount    Int       @default(0)
+  maxRetries    Int       @default(3)
+  failureReason String?
+  settledAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt()
 }
