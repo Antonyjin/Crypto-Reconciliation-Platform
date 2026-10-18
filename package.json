@@ -22,11 +22,11 @@
     "db:migration:create": "echo 'TODO: Implement migration creation'"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "eslint": "^8.56.0",
-    "prettier": "^3.1.0",
-    "typescript": "^5.3.0"
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@8.12.0",
   "engines": {
