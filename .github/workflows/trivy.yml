@@ -9,19 +9,29 @@ on:
 jobs:
   trivy:
     runs-on: ubuntu-latest
-    
+    permissions:
+      security-events: write
+      contents: read
     strategy:
       fail-fast: false
       matrix:
         image: [api-gateway, ingestion, dashboard]
-
     steps:
-      - uses: actions/checkout@v4
-      - run: docker compose build ${{ matrix.image }}
-      - uses: aquasecurity/trivy-action@v0.36.0
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build image
+        run: docker compose build ${{ matrix.image }}
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: crypto-reconciliation-platform-${{ matrix.image }}:latest
           severity: HIGH,CRITICAL
           ignore-unfixed: true
           exit-code: '0'
-          format: table
+          format: sarif
+          output: trivy-${{ matrix.image }}.sarif
+      - name: Upload results to Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-${{ matrix.image }}.sarif
+          category: trivy-${{ matrix.image }}
