@@ -1,0 +1,27 @@
+name: Trivy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [api-gateway, ingestion, dashboard]
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose build ${{ matrix.image }}
+      - uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: crypto-reconciliation-platform-${{ matrix.image }}:latest
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: '0'
+          format: table
